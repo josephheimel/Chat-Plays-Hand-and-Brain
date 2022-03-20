@@ -20,25 +20,6 @@ let listeningForCount = false;
 let users = {};
 
 client.on('message', (wat, tags, message, self) => {
-  if (self) return;
   const { username } = tags;
-  if (username.toLowerCase() === channel.toLowerCase()) {
-    if (message === '!start-count') {
-      listeningForCount = true;
-    } else if (message === '!end-count') {
-      listeningForCount = false;
-      // say count out loud.
-      const sayCount = new SpeechSynthesisUtterance(Object.keys(users).length);
-      window.speechSynthesis.speak(sayCount);
-    } else if (message === '!clear-count') {
-      countElement.textContent = 'Waiting for count...';
-      usersElement.textContent = '';
-      users = {};
-    }
-  } else if (listeningForCount && message === '1') {
-    users[tags.username] = true;
-    // display current count page.
-    countElement.textContent = Object.keys(users).length;
-    usersElement.textContent = Object.keys(users).join(', ');
-  }
+  console.log({ username, message })
 });
