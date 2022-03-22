@@ -2,9 +2,13 @@
 
 * [x] Setup
 * [x] Listen for messages in channel
-* [x] Listen for !start-count
-  * Count all messages from unique users that have the number 1 in them
-* [x] Display total count on webpage
-* [x] Display name of all users that sent a message
-* [x] Listen for !stop-count
-* [x] Use text to speech to say the count out loud
+* [x] Listen for votes
+  * Count all messages that have chess moves or pieces in them
+* [] Display vote rankings on webpage
+* [] Stop tallying votes
+* [] Only tally valid moves/pieces
+
+
+Bugs:
+* Castling gives NaN
+* Move notation check doesn't account for additional words??

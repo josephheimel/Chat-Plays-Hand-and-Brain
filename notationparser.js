@@ -84,4 +84,21 @@ const validateMove = input => {
       to: `${toFile || '.'}${toRank || '.'}`,
     }
   }
+} // doesn't account for additional words (other function does)
+
+const validatePiece = input => {
+
+  input = input.toLowerCase();
+
+  ret = undefined;
+
+  pieces = ["pawn", "king", "queen", "bishop", "knight", "rook"];
+
+  pieces.forEach(str => {
+    if(input.includes(str)) {
+      ret = str;
+    }
+  });
+
+  return ret;
 }
