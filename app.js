@@ -14,6 +14,10 @@ const client = new tmi.Client({
 
 client.connect();
 
+const chess = new Chess();
+
+console.log(chess.moves());
+
 let listeningForCount = true;
 
 // Boolean switch between expecting a piece as input or expecting a move, true == move and false == piece
