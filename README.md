@@ -14,3 +14,4 @@
 
 
 Bugs:
+* Validate confuses pawn moves and piece moves to the same square

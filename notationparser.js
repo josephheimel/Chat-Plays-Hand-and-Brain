@@ -1,10 +1,10 @@
-const validateMove = (input, legalMoves) => {
+const validateInput = (input, acceptedInputs) => {
 
   input = input.toLowerCase();
 
   ret = undefined;
 
-  legalMoves.forEach(str => {
+  acceptedInputs.forEach(str => {
     if(input.includes(str.toLowerCase())) {
       ret = str;
     }
@@ -12,21 +12,4 @@ const validateMove = (input, legalMoves) => {
 
   return ret;
 
-}
-
-const validatePiece = input => {
-
-  input = input.toLowerCase();
-
-  ret = undefined;
-
-  pieces = ["pawn", "king", "queen", "bishop", "knight", "rook"];
-
-  pieces.forEach(str => {
-    if(input.includes(str)) {
-      ret = str;
-    }
-  });
-
-  return ret;
 }
