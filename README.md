@@ -4,9 +4,12 @@
 * [x] Listen for messages in channel
 * [x] Listen for votes
   * Count all messages that have chess moves or pieces in them
+* [/] Only tally valid moves/pieces
+  * [] Track chess board moves
 * [] Display vote rankings on webpage
 * [] Stop tallying votes
-* [] Only tally valid moves/pieces
+* [] Track chess board moves
+
 
 
 Bugs:

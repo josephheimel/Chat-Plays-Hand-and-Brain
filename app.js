@@ -23,20 +23,20 @@ let listeningForCount = true;
 // Boolean switch between expecting a piece as input or expecting a move, true == move and false == piece
 let moveNotPiece = true;
 
-//Map of chat move/piece votes to number of occurrances
+//Map of chat move/piece votes to number of occurrences
 const voteMap = new Map();
 
 client.on('message', (wat, tags, message, self) => {
-  console.log({ message })
-  let vote;
 
   if(!listeningForCount) { return; } // Exit if not listening for count
 
+  console.log({ message })
+  let vote;
+
   // Create move vote from message
   if(moveNotPiece) {
-    m = validateMove(message);
-    if(m == undefined) { return; } // Exit if not a valid move
-    vote = m.piece + m.from + m.to;
+    vote = validateMove(message, chess.moves());
+    if(vote == undefined) { return; } // Exit if not a valid move
   } else {                          // Create piece vote from message
     vote = validatePiece(message);
     if(vote == undefined) { return; } // Exit if not a valid piece
@@ -51,4 +51,20 @@ client.on('message', (wat, tags, message, self) => {
 
   console.log({ map: voteMap })
 
+});
+
+
+/**
+ * TODO: Function that tracks moves made by player and opponent
+ * 
+ *        Need to reference chess.com tab html
+ */
+
+const gameBoard = document.querySelector('#game-board');
+console.log("gameBoard", gameBoard);
+
+const target = document.querySelector(CLOCK_CLASS);                              
+const observer = new MutationObserver(() => {
+if ( target.classList.contains(ACTIVE_CLASS) ){
+  }
 });
