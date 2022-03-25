@@ -5,7 +5,7 @@ const validateMove = (input, legalMoves) => {
   ret = undefined;
 
   legalMoves.forEach(str => {
-    if(input.includes(str)) {
+    if(input.includes(str.toLowerCase())) {
       ret = str;
     }
   });

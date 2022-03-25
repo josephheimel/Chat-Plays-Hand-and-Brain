@@ -9,9 +9,8 @@
 * [] Display vote rankings on webpage
 * [] Stop tallying votes
 * [] Track chess board moves
+* [] Change piece name to letter (make notation parser one function)
 
 
 
 Bugs:
-* Castling gives NaN
-* Move notation check doesn't account for additional words??
