@@ -59,8 +59,8 @@ client.on('message', (wat, tags, message, self) => {
 
   console.log({ map: voteMap })
 
-  //chess.move(vote);
-  //console.log(chess.moves());
+  chess.move(vote);
+  console.log(chess.moves());
 
 });
 
