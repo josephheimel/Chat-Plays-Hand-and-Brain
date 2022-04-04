@@ -21,35 +21,9 @@ const getChessGameHtml = chrome => {
                     chrome.scripting.executeScript({
                         target: { tabId },
                         func: function getDoc() {
-                            const getMoves = () => {
-                                const id = x => x
-                                const compose = (...fns) => fns.reduce((a, e) => x => a(e(x)), id)
-                                const map = fn => xs => xs.map(fn)
-                                const getChildren = el => Array.from(el.children)
-                                const getMoveHtml = el => el.innerHTML
-                                const normalizeMoveHtml = text => {
-                                    if (!text.includes('span')) return text
-                                    const parts = text.split('/span>')
-                                    const moveInfo = parts[parts.length - 1]
-                                    const pieceType = parts[0].replace(/>/g, '').replace(/</g, '')
-                                        .split(' ').map(e => e.split('=').map(e => e.replace(/"/g, ''))).filter(e => e.length > 1)
-                                        .filter(e => e[0] == 'data-figurine')[0][1]
-                                    const moveMetadata = { moveInfo, pieceType }
-                                    return pieceType + moveInfo
-                                }
-                                const parseNodeEl = map(compose(normalizeMoveHtml, getMoveHtml))
-                                const moveListEl = document.querySelector('vertical-move-list')
-                                return getChildren(moveListEl).map(compose(parseNodeEl, getChildren))
-                            }
-
-                            if (document.title.includes("Chess.com")) {
-                                return {
-                                    html: document.querySelector('html').innerHTML,
-                                    title: document.title,
-                                    payload: getMoves()
-                                }
-
-                            }
+                        const title =  document.title
+                        const data = document.querySelector("html").innerHTML
+                        return { title, data}
                         },
                     }, htmlData => resolve(htmlData));
 
@@ -57,10 +31,6 @@ const getChessGameHtml = chrome => {
             })
         ).then(results => resolve2(results))
     }).then(data => Promise.all(data))
-        .then(data => {
-            return data.filter(x => x).map(d => d[0].result)
-        })
-        .then(data => console.log({ data }))
 }
 
 chrome.runtime.onInstalled.addListener((...args) => {
