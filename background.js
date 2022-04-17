@@ -1,5 +1,4 @@
 const log = (...args) => console.log({ args })
-console.log("Installed!")
 const map = fn => xs => xs.map(fn)
 const getTabId = x => x.id
 const compose = (...fns) => fns.reduce((a, e) => x => a(e(x)), x => x)
@@ -9,15 +8,16 @@ const logTap = (arg) => {
 }
 // temp1.match(/.*vertical-move-list.*/g).flatMap(e => [...e.matchAll(/div class=\"move\".*/g)].map(e => e.input))
 
-const isChessDotCom = d => (console.log(d), d.result.title.includes("Chess.com"))
+const isChessDotCom = d => (d && d.result && d.result.title && d.result.title.includes("Chess.com"))
 const getMoves = data => {
-    console.log(data)
+    const rawChessHtml = data?.result?.data
+    const regexParseMoves = htmlData => htmlData.split('vertical-move-list')[2].match(/>([^<]*)</g)
+    if (!rawChessHtml) return null
     return data
 }
 
 const getChessGameHtml = chrome => {
     const isChessGame = result => {
-        console.log({ result })
         return result.title.includes('Chess')
     }
     return new Promise((resolve2, _) => {
@@ -38,7 +38,7 @@ const getChessGameHtml = chrome => {
             })
         ).then(results => resolve2(results))
     }).then(data => Promise.all(data))
-    .then(data => data.filter(e => e).find(isChessDotCom))
+    .then(data => data.filter(e => e).flatMap(e => e).find(isChessDotCom))
     .then(getMoves)
 
 }
