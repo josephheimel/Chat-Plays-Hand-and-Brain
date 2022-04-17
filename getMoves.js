@@ -15,6 +15,7 @@ const getMoves = () => {
         return pieceType + moveInfo
     }
     const parseNodeEl = map(compose(normalizeMoveHtml, getMoveHtml))
+
     const moveListEl = document.querySelector('vertical-move-list')
     return getChildren(moveListEl).map(compose(parseNodeEl, getChildren))
 }
@@ -31,4 +32,3 @@ const takeActionOnNewMove = (callback, pollingIntervalMilliseconds = 100) => {
     }, pollingIntervalMilliseconds)
 }
 takeActionOnNewMove((...data) => console.log(data))
-console.log("hello")
