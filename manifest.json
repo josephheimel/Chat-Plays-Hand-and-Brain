@@ -1,0 +1,25 @@
+{
+    "name": "hand and brain",
+    "id": "hand and brain",
+    "version": "1.0.0",
+    "description": "hand and brain",
+    "manifest_version": 3,
+    "author": "Heimel brothers",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "hand and brain"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "tabs",
+        "https://*/*",
+        "scripting"
+    ],
+    "host_permissions": [
+        "tabs",
+        "https://*/*"
+
+    ]
+}

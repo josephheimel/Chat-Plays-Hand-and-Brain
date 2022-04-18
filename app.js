@@ -64,24 +64,4 @@ client.on('message', (wat, tags, message, self) => {
 
 });
 
-
-/**
- * TODO: Function that tracks moves made by player and opponent
- * 
- *        Need to reference chess.com tab html
- * 
- * 
- *
-
-const gameBoard = document.querySelector('#game-board');
-console.log("gameBoard", gameBoard);
-
-const target = document.querySelector(CLOCK_CLASS);                              
-const observer = new MutationObserver(() => {
-if ( target.classList.contains(ACTIVE_CLASS) ){
-  }
-});
-
-chess.move(move)
-
- */
+takeActionOnNewMove(move => console.log(move))

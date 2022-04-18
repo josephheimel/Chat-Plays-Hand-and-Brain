@@ -15,6 +15,20 @@ const getMoves = () => {
         return pieceType + moveInfo
     }
     const parseNodeEl = map(compose(normalizeMoveHtml, getMoveHtml))
+
     const moveListEl = document.querySelector('vertical-move-list')
     return getChildren(moveListEl).map(compose(parseNodeEl, getChildren))
 }
+
+const takeActionOnNewMove = (callback, pollingIntervalMilliseconds = 100) => {
+    let moves = null
+    
+    setInterval(() => {
+        const newMoves = getMoves()
+        if (JSON.stringify(moves) !== JSON.stringify(newMoves)) {
+            callback(newMoves[newMoves.length - 1], newMoves)
+            moves = newMoves
+        }
+    }, pollingIntervalMilliseconds)
+}
+takeActionOnNewMove((...data) => console.log(data))
