@@ -1,5 +1,6 @@
 const log = (...args) => console.log({ args })
 const map = fn => xs => xs.map(fn)
+const filter = fn => arr => arr.filter(fn)
 const getTabId = x => x.id
 const compose = (...fns) => fns.reduce((a, e) => x => a(e(x)), x => x)
 const logTap = (arg) => {
@@ -12,6 +13,13 @@ const isChessDotCom = d => (d && d.result && d.result.title && d.result.title.in
 const getMoves = data => {
     const rawChessHtml = data?.result?.data
     const regexParseMoves = htmlData => htmlData.split('vertical-move-list')[2].match(/>([^<]*)</g)
+  
+    const isNonempty = x => x.length > 0
+    const isActualMove = x => !x.includes('.')
+    const withoutCaret = x => x.replace('<',  '').replace('>', '')
+    const normalizeMoves = compose(filter(isActualMove),filter(isNonempty),map(withoutCaret))
+    const parsed = compose(normalizeMoves, regexParseMoves)(rawChessHtml)
+    console.log({ regexParsed: parsed }) 
     if (!rawChessHtml) return null
     return data
 }
