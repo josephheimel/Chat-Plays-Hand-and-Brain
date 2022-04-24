@@ -7,7 +7,7 @@ const logTap = (arg) => {
     console.log({ arg })
     return arg
 }
-// temp1.match(/.*vertical-move-list.*/g).flatMap(e => [...e.matchAll(/div class=\"move\".*/g)].map(e => e.input))
+
 
 const isChessDotCom = d => (d && d.result && d.result.title && d.result.title.includes("Chess.com"))
 const getMoves = data => {
@@ -54,3 +54,17 @@ const getChessGameHtml = chrome => {
 chrome.runtime.onInstalled.addListener((...args) => {
     getChessGameHtml(chrome).then(log)
 });
+
+
+chrome.action.onClicked.addListener(tab => {
+    chrome.tabs.create({
+        url: chrome.runtime.getURL('index.html'),
+        active: false
+    }, function(tab) {
+        chrome.windows.create({
+            tabId:tab.id,
+            type: 'popup',
+            focused: false
+        });
+    });
+})

@@ -4,9 +4,9 @@
     "version": "1.0.0",
     "description": "hand and brain",
     "manifest_version": 3,
-    "author": "Heimel brothers",
+    "author": "Joseph and Louis Heimel",
     "action": {
-        "default_popup": "index.html",
+        "default_icon": "icon.png",
         "default_title": "hand and brain"
     },
     "background": {
@@ -22,4 +22,5 @@
         "https://*/*"
 
     ]
+
 }
