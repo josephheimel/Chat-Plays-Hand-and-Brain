@@ -21,7 +21,10 @@ const getMoves = data => {
     const parsed = compose(normalizeMoves, regexParseMoves)(rawChessHtml)
     console.log({ regexParsed: parsed }) 
     if (!rawChessHtml) return null
-    return data
+
+    console.log(data)
+
+    return parsed
 }
 
 const getChessGameHtml = chrome => {
@@ -51,9 +54,14 @@ const getChessGameHtml = chrome => {
 
 }
 
-chrome.runtime.onInstalled.addListener((...args) => {
-    getChessGameHtml(chrome).then(log)
-});
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse){
+        if(request.msg == "startFunc") {
+            getChessGameHtml(chrome).then(sendResponse)
+            return true
+        };
+    }
+);
 
 
 chrome.action.onClicked.addListener(tab => {

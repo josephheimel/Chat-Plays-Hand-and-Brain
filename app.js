@@ -64,4 +64,14 @@ client.on('message', (wat, tags, message, self) => {
 
 });
 
-takeActionOnNewMove(move => console.log(move))
+
+  let text
+
+  chrome.runtime.sendMessage({ msg: "startFunc" }, function(response) {
+    console.log(response)
+    text = response
+  });
+
+  let tag = document.getElementById('moves').childNodes[0]
+  
+  console.log(text)
